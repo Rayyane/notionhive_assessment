@@ -5,15 +5,7 @@
 
     $database = new Database();
 
-    $sql = "SELECT c.id AS category_id, c.Name AS category_name
-            FROM category c
-            LEFT JOIN catetory_relations cr ON c.id = cr.categoryId
-            WHERE cr.ParentcategoryId IS NULL";
-    $result = $database->query($sql);
-    $rootCategories = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $rootCategories[] = new Category($row['category_id'], $row['category_name']);
-    }
+    $rootCategories = Category::getRootCategories($database);
 
     if (!empty($rootCategories)) {
         echo "<h2>Category Tree with Item Counts</h2>";
