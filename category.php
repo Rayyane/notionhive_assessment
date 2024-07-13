@@ -90,4 +90,5 @@ class Category {
 
         return $rootCategories;
     }
+
 }
